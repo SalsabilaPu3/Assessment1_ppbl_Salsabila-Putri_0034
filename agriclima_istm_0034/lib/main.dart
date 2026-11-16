@@ -1,14 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/theme_cubit.dart';
 import 'navigation/app_routes.dart';
+import 'state/theme_cubit.dart';
+import 'state/prediksi_cubit.dart';
 
 void main() {
   runApp(
-    BlocProvider(
-      create: (_) => ThemeCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ThemeCubit()),
+        BlocProvider(create: (_) => PrediksiCubit()),
+      ],
       child: const AgriClimaApp(),
     ),
   );
@@ -30,6 +33,7 @@ class AgriClimaApp extends StatelessWidget {
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
               seedColor: const Color(0xFF2E7D32),
+              brightness: Brightness.light,
             ),
             scaffoldBackgroundColor: const Color(0xFFF4F7F2),
             useMaterial3: true,
@@ -40,7 +44,6 @@ class AgriClimaApp extends StatelessWidget {
               seedColor: const Color(0xFF2E7D32),
               brightness: Brightness.dark,
             ),
-            brightness: Brightness.dark,
             useMaterial3: true,
           ),
 
